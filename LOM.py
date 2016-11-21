@@ -32,11 +32,11 @@ class LOM():
         
         self.fitted = False
     
-    def fit(self,n,P=1,iters=500,kernels=[]):
+    def fit(self,n,P=1,iters=500,kernels=[],ls = 0.5):
         self.P = P
         self.n = n        
         if len(kernels) == 0:
-            kernels = [GPy.kern.ExpQuad(1,lengthscale=0.5) for p in range(self.P)]
+            kernels = [GPy.kern.ExpQuad(1,lengthscale=ls) for p in range(self.P)]
         self.setupVI(kernels)
         self.VI(iters)
         self.fitted=True
